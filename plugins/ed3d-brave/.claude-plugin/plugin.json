@@ -1,0 +1,11 @@
+{
+    "name": "ed3d-brave",
+    "version": "1.0.0",
+    "description": "Brave Search integration for web, local, video, image, and news search with AI summarization",
+    "author": {
+        "name": "Ed Ropple",
+        "email": "ed+claudeplugins@ed3d.net"
+    },
+    "license": "UNLICENSED",
+    "keywords": ["search", "brave", "web", "news", "video", "image", "local", "summarization"]
+}

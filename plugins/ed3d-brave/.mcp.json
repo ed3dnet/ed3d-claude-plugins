@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "brave": {
+            "command": "bash",
+            "args": [
+                "-c",
+                "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env; exec env -i PATH=\"$PATH\" CLAUDE_PROJECT_ROOT=\"$CLAUDE_PROJECT_ROOT\" BRAVE_API_KEY=\"$BRAVE_API_KEY\" npx -y @brave/brave-search-mcp-server@2.0.57)"
+            ]
+        }
+    }
+}

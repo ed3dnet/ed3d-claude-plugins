@@ -21,6 +21,13 @@
             "description": "Advanced web search and research using Tavily API with crawling and extraction capabilities",
             "category": "utilities",
             "tags": ["search", "research", "web", "tavily", "crawl", "extract"]
+        },
+        {
+            "name": "ed3d-brave",
+            "source": "./plugins/ed3d-brave",
+            "description": "Brave Search integration for web, local, video, image, and news search with AI summarization",
+            "category": "utilities",
+            "tags": ["search", "brave", "web", "news", "video", "image", "local", "summarization"]
         }
     ]
 }
