@@ -35,6 +35,13 @@
             "description": "Browser automation and testing using Microsoft Playwright MCP server",
             "category": "development",
             "tags": ["playwright", "browser", "automation", "testing", "web"]
+        },
+        {
+            "name": "ed3d-context7",
+            "source": "./plugins/ed3d-context7",
+            "description": "Access up-to-date documentation for frameworks and libraries via Context7",
+            "category": "development",
+            "tags": ["context7", "documentation", "api", "libraries", "frameworks", "docs"]
         }
     ]
 }
