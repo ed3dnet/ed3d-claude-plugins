@@ -55,7 +55,7 @@ The `.claude-plugin/plugin.json` file is required and defines plugin metadata:
   },
   "homepage": "https://docs.example.com/plugin",
   "repository": "https://github.com/author/plugin",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "keywords": ["keyword1", "keyword2"],
   "commands": ["./custom/commands/special.md"],
   "agents": "./custom/agents/",

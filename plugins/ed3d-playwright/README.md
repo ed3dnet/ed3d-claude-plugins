@@ -208,4 +208,4 @@ By default, Playwright runs in headed mode (browser window visible). This works 
 
 ## License
 
-UNLICENSED
+GPL-3.0

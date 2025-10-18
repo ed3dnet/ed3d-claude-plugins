@@ -154,4 +154,4 @@ Check MCP server status:
 
 ## License
 
-UNLICENSED
+GPL-3.0

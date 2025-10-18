@@ -197,4 +197,4 @@ Or use the `c7_info` tool directly.
 
 ## License
 
-UNLICENSED
+GPL-3.0

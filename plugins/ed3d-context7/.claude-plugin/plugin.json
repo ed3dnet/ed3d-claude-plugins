@@ -8,6 +8,6 @@
     },
     "homepage": "https://github.com/ed3dnet/ed3d-claude-plugins",
     "repository": "https://github.com/ed3dnet/ed3d-claude-plugins",
-    "license": "UNLICENSED",
+    "license": "GPL-3.0",
     "keywords": ["context7", "documentation", "api", "libraries", "frameworks", "docs"]
 }

@@ -99,4 +99,4 @@ The agent will inform you if it cannot find requested content after fetching. Th
 
 ## License
 
-UNLICENSED
+GPL-3.0

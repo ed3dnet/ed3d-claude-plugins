@@ -6,6 +6,6 @@
         "name": "Ed Ropple",
         "email": "ed+claudeplugins@ed3d.net"
     },
-    "license": "UNLICENSED",
+    "license": "GPL-3.0",
     "keywords": ["web", "fetch", "scraping", "content-extraction"]
 }

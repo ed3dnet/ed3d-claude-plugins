@@ -195,4 +195,4 @@ This is normal on free tier - local search falls back to web search. The agent w
 
 ## License
 
-UNLICENSED
+GPL-3.0
