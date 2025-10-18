@@ -1,0 +1,13 @@
+{
+    "name": "ed3d-playwright",
+    "version": "1.0.0",
+    "description": "Browser automation and testing using Microsoft Playwright MCP server",
+    "author": {
+        "name": "Ed Ropple",
+        "email": "ed+claudeplugins@ed3d.net"
+    },
+    "homepage": "https://github.com/ed3dnet/ed3d-claude-plugins",
+    "repository": "https://github.com/ed3dnet/ed3d-claude-plugins",
+    "license": "UNLICENSED",
+    "keywords": ["playwright", "browser", "automation", "testing", "web"]
+}

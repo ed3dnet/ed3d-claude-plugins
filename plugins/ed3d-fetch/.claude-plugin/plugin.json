@@ -1,7 +1,7 @@
 {
     "name": "ed3d-fetch",
     "version": "1.0.0",
-    "description": "Enhanced web content fetching with detailed extraction capabilities",
+    "description": "Replaces WebFetch with a literal fetch + provides controllable Haiku summarizer",
     "author": {
         "name": "Ed Ropple",
         "email": "ed+claudeplugins@ed3d.net"

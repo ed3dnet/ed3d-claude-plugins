@@ -1,7 +1,7 @@
 {
     "name": "ed3d-tavily",
     "version": "1.0.0",
-    "description": "Advanced web search and research using Tavily API",
+    "description": "Enables the Tavily Search plugin + includes a search delegate subagent",
     "author": {
         "name": "Ed Ropple",
         "email": "ed+claudeplugins@ed3d.net"

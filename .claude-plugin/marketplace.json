@@ -28,6 +28,13 @@
             "description": "Brave Search integration for web, local, video, image, and news search with AI summarization",
             "category": "utilities",
             "tags": ["search", "brave", "web", "news", "video", "image", "local", "summarization"]
+        },
+        {
+            "name": "ed3d-playwright",
+            "source": "./plugins/ed3d-playwright",
+            "description": "Browser automation and testing using Microsoft Playwright MCP server",
+            "category": "development",
+            "tags": ["playwright", "browser", "automation", "testing", "web"]
         }
     ]
 }

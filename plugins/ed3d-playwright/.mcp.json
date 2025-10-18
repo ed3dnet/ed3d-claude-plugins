@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "playwright": {
+            "command": "bash",
+            "args": [
+                "-c",
+                "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env 2>/dev/null || true; exec env -i PATH=\"$PATH\" CLAUDE_PROJECT_ROOT=\"$CLAUDE_PROJECT_ROOT\" npx -y @playwright/mcp@latest ${PLAYWRIGHT_ARGS})"
+            ]
+        }
+    }
+}
