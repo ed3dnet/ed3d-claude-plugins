@@ -1,0 +1,11 @@
+{
+    "name": "ed3d-claude-plugins",
+    "metadata": {
+        "description": "ed3d.net's collection of Claude Code plugins",
+        "version": "1.0.0"
+    },
+    "owner": {
+        "name": "Ed Ropple <ed+claudeplugins@ed3d.net>"
+    },
+    "plugins": []
+}
