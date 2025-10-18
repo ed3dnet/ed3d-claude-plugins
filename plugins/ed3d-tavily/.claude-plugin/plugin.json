@@ -1,0 +1,11 @@
+{
+    "name": "ed3d-tavily",
+    "version": "1.0.0",
+    "description": "Advanced web search and research using Tavily API",
+    "author": {
+        "name": "Ed Ropple",
+        "email": "ed+claudeplugins@ed3d.net"
+    },
+    "license": "UNLICENSED",
+    "keywords": ["search", "research", "web", "tavily", "crawl", "extract"]
+}

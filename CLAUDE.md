@@ -79,7 +79,7 @@ The `.claude-plugin/plugin.json` file is required and defines plugin metadata:
 
 All ed3d-plugins use a **consistent workaround** that provides additional benefits:
 
-**File**: `.claude-plugins.env` (in project root, gitignored)
+**File**: `.ed3d-plugins.env` (in project root, gitignored)
 
 **Pattern**: All MCP servers in our plugins use this approach:
 
@@ -90,7 +90,7 @@ All ed3d-plugins use a **consistent workaround** that provides additional benefi
       "command": "bash",
       "args": [
         "-c",
-        "source ${CLAUDE_PROJECT_ROOT}/.claude-plugins.env && exec npx -y @service/mcp-server"
+        "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env && exec npx -y @service/mcp-server)"
       ]
     }
   }
@@ -99,9 +99,10 @@ All ed3d-plugins use a **consistent workaround** that provides additional benefi
 
 **Why this works**:
 1. `bash -c` allows us to run shell commands
-2. `source ${CLAUDE_PROJECT_ROOT}/.claude-plugins.env` loads environment variables
-3. `exec` replaces the shell with the actual MCP server process
-4. `${CLAUDE_PROJECT_ROOT}` expands correctly (it's a Claude Code variable, not user env var)
+2. Subshell `()` provides isolation from parent environment
+3. `source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env` loads environment variables
+4. `exec` replaces the shell with the actual MCP server process
+5. `${CLAUDE_PROJECT_ROOT}` expands correctly (it's a Claude Code variable, not user env var)
 
 **Benefits**:
 - **Plugin enable/disable = mode switching**: Disabling plugin stops its MCP servers
@@ -110,22 +111,54 @@ All ed3d-plugins use a **consistent workaround** that provides additional benefi
 - **Per-project configuration**: Different projects can have different credentials
 - **Works around the bug**: Avoids broken `${VAR}` expansion in plugin `.mcp.json`
 
+### Clean Environment Pattern (Recommended)
+
+For enhanced security, use a **clean environment** that explicitly passes only required variables:
+
+```json
+{
+  "mcpServers": {
+    "plugin-service": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env; exec env -i PATH=\"$PATH\" CLAUDE_PROJECT_ROOT=\"$CLAUDE_PROJECT_ROOT\" SERVICE_API_KEY=\"$SERVICE_API_KEY\" npx -y @service/mcp-server)"
+      ]
+    }
+  }
+}
+```
+
+**Why this is better**:
+1. `env -i` clears all environment variables before running the server
+2. Only explicitly listed variables are passed to the MCP server
+3. Prevents accidental exposure of unrelated environment variables
+4. Still maintains all the benefits of the standard pattern
+
+**Use this pattern when**:
+- Security is a primary concern
+- You want minimal environment exposure
+- The MCP server only needs specific variables
+- You want to prevent environment pollution
+
 ### Environment File Structure
 
-Users create `.claude-plugins.env` in their project root:
+Users create `.ed3d-plugins.env` in their project root:
 
 ```bash
-# .claude-plugins.env
+# .ed3d-plugins.env
 export OPENAI_API_KEY="sk-..."
 export ANTHROPIC_API_KEY="sk-ant-..."
 export GITHUB_TOKEN="ghp_..."
+export TAVILY_API_KEY="tvly-..."
 
 # Password manager integration examples:
 export GITHUB_TOKEN=$(op read "op://Private/GitHub/token")
 export OPENAI_API_KEY=$(bw get password "OpenAI API Key")
+export TAVILY_API_KEY=$(op read "op://Private/Tavily/api-key")
 ```
 
-**Template provided**: `.claude-plugins.env.example` in repository root
+**Template provided**: `.ed3d-plugins.env.example` in repository root
 
 ## Available Plugin Components
 
@@ -258,14 +291,30 @@ skills/
       "command": "bash",
       "args": [
         "-c",
-        "source ${CLAUDE_PROJECT_ROOT}/.claude-plugins.env && exec npx -y @service/mcp-server"
+        "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env && exec npx -y @service/mcp-server)"
       ]
     },
     "plugin-python-service": {
       "command": "bash",
       "args": [
         "-c",
-        "source ${CLAUDE_PROJECT_ROOT}/.claude-plugins.env && exec python3 ${CLAUDE_PLUGIN_ROOT}/servers/service.py"
+        "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env && exec python3 ${CLAUDE_PLUGIN_ROOT}/servers/service.py)"
+      ]
+    }
+  }
+}
+```
+
+**Clean environment pattern** (recommended for better security):
+
+```json
+{
+  "mcpServers": {
+    "plugin-service-name": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env; exec env -i PATH=\"$PATH\" CLAUDE_PROJECT_ROOT=\"$CLAUDE_PROJECT_ROOT\" SERVICE_API_KEY=\"$SERVICE_API_KEY\" npx -y @service/mcp-server)"
       ]
     }
   }
@@ -274,9 +323,11 @@ skills/
 
 **Critical pattern elements**:
 1. Always use `bash -c` wrapper
-2. Always source `.claude-plugins.env` from `${CLAUDE_PROJECT_ROOT}`
-3. Use `exec` to replace shell with actual process
-4. Use `${CLAUDE_PLUGIN_ROOT}` for plugin-relative paths
+2. Use subshell `()` for isolation
+3. Always source `.ed3d-plugins.env` from `${CLAUDE_PROJECT_ROOT}`
+4. Use `exec` to replace shell with actual process
+5. Use `${CLAUDE_PLUGIN_ROOT}` for plugin-relative paths
+6. For clean environment: use `env -i` and explicitly pass only needed variables
 
 **Environment variables needed**: Document in plugin README which variables are required (e.g., `OPENAI_API_KEY`, `SERVICE_TOKEN`, etc.)
 
@@ -344,7 +395,7 @@ Create `plugins/my-plugin/.claude-plugin/plugin.json`:
 
 Add commands, agents, skills, hooks, or MCP servers as needed.
 
-**For MCP servers**: Always use the standard ed3d-plugins pattern with bash wrapper and `.claude-plugins.env` sourcing.
+**For MCP servers**: Always use the standard ed3d-plugins pattern with bash wrapper and `.ed3d-plugins.env` sourcing. Prefer the clean environment pattern for better security.
 
 ### 4. Document Environment Variables
 
@@ -353,7 +404,7 @@ If your plugin needs environment variables, document them in the plugin's README
 ```markdown
 ## Required Environment Variables
 
-Add these to your `.claude-plugins.env` file:
+Add these to your `.ed3d-plugins.env` file:
 
 ```bash
 export MY_PLUGIN_API_KEY="your-key-here"
@@ -410,7 +461,7 @@ Brief description of what the plugin does.
 
 ## Configuration
 
-Add to your `.claude-plugins.env`:
+Add to your `.ed3d-plugins.env`:
 
 ```bash
 export MY_PLUGIN_API_KEY="your-key"
@@ -444,14 +495,14 @@ Provide examples of how to use the plugin.
 
 ### Our Convention
 
-- `.claude-plugins.env`: User-defined environment variables in project root
+- `.ed3d-plugins.env`: User-defined environment variables in project root
   - Must be sourced by MCP servers using bash wrapper pattern
   - Should be gitignored
-  - Template provided in `.claude-plugins.env.example`
+  - Template provided in `.ed3d-plugins.env.example`
 
 ## Common Patterns
 
-### MCP Server with API Key
+### MCP Server with API Key (Standard Pattern)
 
 ```json
 {
@@ -460,7 +511,23 @@ Provide examples of how to use the plugin.
       "command": "bash",
       "args": [
         "-c",
-        "source ${CLAUDE_PROJECT_ROOT}/.claude-plugins.env && exec npx -y @company/mcp-server --api-key \"$MY_API_KEY\""
+        "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env && exec npx -y @company/mcp-server)"
+      ]
+    }
+  }
+}
+```
+
+### MCP Server with API Key (Clean Environment Pattern)
+
+```json
+{
+  "mcpServers": {
+    "my-api": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env; exec env -i PATH=\"$PATH\" CLAUDE_PROJECT_ROOT=\"$CLAUDE_PROJECT_ROOT\" MY_API_KEY=\"$MY_API_KEY\" npx -y @company/mcp-server)"
       ]
     }
   }
@@ -521,7 +588,7 @@ Shows:
 | Plugin not loading | Invalid `plugin.json` | Validate JSON syntax |
 | Commands not appearing | Wrong directory structure | Ensure `commands/` at plugin root |
 | Hooks not firing | Script not executable | `chmod +x script.sh` |
-| MCP server fails | Missing environment file | Check `.claude-plugins.env` exists |
+| MCP server fails | Missing environment file | Check `.ed3d-plugins.env` exists |
 | MCP env vars not working | Not using bash wrapper | Use standard ed3d-plugins pattern |
 | Path errors | Absolute paths used | Use `${CLAUDE_PLUGIN_ROOT}` variable |
 
@@ -580,7 +647,7 @@ Plugins are distributed via this marketplace repository:
 
 **Issue**: `${VAR}` expansion doesn't work in plugin `.mcp.json` files
 **Status**: Open bug as of v2.0.14+
-**Workaround**: Use bash wrapper pattern with `.claude-plugins.env` sourcing (documented above)
+**Workaround**: Use bash wrapper pattern with `.ed3d-plugins.env` sourcing (documented above)
 
 ### Windows Native (Not WSL)
 
@@ -597,8 +664,9 @@ Plugins are distributed via this marketplace repository:
 
 ### Security First
 - Never hardcode API keys or tokens
-- Always gitignore `.claude-plugins.env`
+- Always gitignore `.ed3d-plugins.env`
 - Document required environment variables clearly
+- Prefer clean environment pattern (`env -i`) when possible
 
 ### User Experience
 - Plugins should work out of the box after env setup

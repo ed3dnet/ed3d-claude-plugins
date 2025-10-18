@@ -47,15 +47,15 @@ echo ".claude-plugins.env" >> .gitignore
 - **Per-project configuration**: Different projects can have different credentials
 - **Works around bugs**: Avoids current limitations with environment variable expansion in plugin `.mcp.json` files
 
-**Example `.claude-plugins.env` template:**
+**Example `.ed3d-plugins.env` template:**
 
-A template file is provided at `.claude-plugins.env.example`. Copy it to get started:
+A template file is provided at `.ed3d-plugins.env.example`. Copy it to get started:
 
 ```bash
-cp .claude-plugins.env.example .claude-plugins.env
+cp .ed3d-plugins.env.example .ed3d-plugins.env
 ```
 
-Then edit `.claude-plugins.env` and fill in your actual API keys and tokens.
+Then edit `.ed3d-plugins.env` and fill in your actual API keys and tokens.
 
 **Note:** If a plugin requires specific environment variables, check its documentation in the `plugins/` directory for details.
 

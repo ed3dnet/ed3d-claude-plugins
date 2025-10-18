@@ -14,6 +14,13 @@
             "description": "Enhanced web content fetching with detailed extraction and verbatim content support",
             "category": "utilities",
             "tags": ["web", "fetch", "scraping", "content-extraction"]
+        },
+        {
+            "name": "ed3d-tavily",
+            "source": "./plugins/ed3d-tavily",
+            "description": "Advanced web search and research using Tavily API with crawling and extraction capabilities",
+            "category": "utilities",
+            "tags": ["search", "research", "web", "tavily", "crawl", "extract"]
         }
     ]
 }
