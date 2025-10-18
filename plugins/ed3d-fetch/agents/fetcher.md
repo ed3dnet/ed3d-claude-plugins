@@ -8,7 +8,7 @@ capabilities:
   - "Extract structured data, code samples, or specific sections from pages"
 model: haiku
 tools:
-  - "mcp__fetch"
+  - "mcp__plugin_ed3d-fetch_fetch__fetch"
 ---
 
 # Web Fetch Agent
