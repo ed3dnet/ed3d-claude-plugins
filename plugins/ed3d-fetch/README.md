@@ -1,4 +1,4 @@
-# Web Fetch Plugin
+# ed3d Fetch Plugin
 
 Enhanced web content fetching with detailed extraction capabilities using the fetch MCP server.
 
@@ -9,7 +9,7 @@ This plugin provides a specialized agent for fetching and extracting information
 ## Installation
 
 ```bash
-/plugin install web-fetch@ed3d-plugins
+/plugin install ed3d-fetch@ed3d-claude-plugins
 ```
 
 After installation, restart Claude Code to activate the plugin.
@@ -19,12 +19,12 @@ After installation, restart Claude Code to activate the plugin.
 - **Detailed content extraction**: Fetch specific information from web pages with high precision
 - **Verbatim content support**: Retrieve exact quotes, code samples, or passages without modification
 - **Incremental fetching**: Handles large pages by fetching content in manageable chunks
-- **Haiku-powered**: Uses Claude 3.5 Haiku for fast, efficient content extraction
+- **Haiku-powered**: Uses Claude Haiku 4.5 for fast, efficient content extraction
 - **Structured extraction**: Extract API documentation, installation instructions, error messages, and more
 
-## Agent: Web Fetch
+## Agent: ed3d-fetch
 
-The web-fetch agent is automatically available after plugin installation. Claude will invoke it when appropriate, particularly when you need:
+The ed3d-fetch agent is automatically available after plugin installation. Claude will invoke it when appropriate, particularly when you need:
 
 - Detailed information from web pages
 - Verbatim quotes or code samples
@@ -51,7 +51,7 @@ This plugin uses the fetch MCP server (`mcp-server-fetch`) via `uvx`. No additio
 ## How It Works
 
 1. The plugin provides a fetch MCP server that handles web content retrieval
-2. The web-fetch agent uses Claude 3.5 Haiku with access to only the fetch MCP tools
+2. The ed3d-fetch agent uses Claude Haiku 4.5 with access to only the fetch MCP tools
 3. The agent fetches content starting at 20,000 characters and scales up as needed
 4. Content is extracted and formatted according to your specific requirements
 
@@ -65,7 +65,7 @@ This plugin uses the fetch MCP server (`mcp-server-fetch`) via `uvx`. No additio
 
 ## Technical Details
 
-- **Model**: Claude 3.5 Haiku (fast and efficient)
+- **Model**: Claude Haiku 4.5 (fast and efficient)
 - **Tools**: Only fetch MCP tools (focused capability set)
 - **Default fetch size**: 20,000 characters
 - **Scaling**: Automatically requests more content when needed
@@ -74,9 +74,9 @@ This plugin uses the fetch MCP server (`mcp-server-fetch`) via `uvx`. No additio
 
 ### Agent not being invoked
 
-If Claude isn't using the web-fetch agent:
-- Explicitly ask Claude to use the web-fetch agent
-- Try: "Use the web-fetch agent to get [content] from [URL]"
+If Claude isn't using the ed3d-fetch agent:
+- Explicitly ask Claude to use the ed3d-fetch agent
+- Try: "Use the ed3d-fetch agent to get [content] from [URL]"
 
 ### Fetch MCP server not starting
 
@@ -99,4 +99,4 @@ The agent will inform you if it cannot find requested content after fetching. Th
 
 ## License
 
-MIT
+UNLICENSED
