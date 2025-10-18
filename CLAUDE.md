@@ -395,7 +395,19 @@ Create `plugins/my-plugin/.claude-plugin/plugin.json`:
 
 Add commands, agents, skills, hooks, or MCP servers as needed.
 
-**For MCP servers**: Always use the standard ed3d-plugins pattern with bash wrapper and `.ed3d-plugins.env` sourcing. Prefer the clean environment pattern for better security.
+**For MCP servers**:
+- Always use bash wrapper with `.ed3d-plugins.env` sourcing
+- **Prefer the clean environment pattern** for better security (see examples in "MCP Servers" section above)
+- Clean pattern uses `env -i` to clear environment and explicitly pass only: `PATH`, `CLAUDE_PROJECT_ROOT`, and your API key(s)
+- Use subshell `()` for isolation
+- MCP server name in `.mcp.json` should be descriptive but concise (e.g., `tavily`, `fetch`)
+
+**For agents using MCP tools**:
+- Use fully qualified tool names: `mcp__plugin_{plugin-name}_{mcp-server-name}__{tool-name}`
+- Example: if your plugin is `ed3d-tavily` with MCP server `tavily`, tools are:
+  - `mcp__plugin_ed3d-tavily_tavily__tavily-search`
+  - `mcp__plugin_ed3d-tavily_tavily__tavily-extract`
+- List all tools in the agent's frontmatter `tools:` array
 
 ### 4. Document Environment Variables
 

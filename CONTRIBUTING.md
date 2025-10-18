@@ -26,6 +26,11 @@ your-plugin/
 └── README.md               # Recommended: Documentation
 ```
 
+**For MCP servers**: See [CLAUDE.md](./CLAUDE.md) for detailed implementation patterns. All ed3d-plugins use a standardized approach:
+- Bash wrapper with `.ed3d-plugins.env` sourcing
+- **Clean environment pattern** (recommended): use `env -i` to explicitly pass only required variables
+- Document required environment variables in your README.md
+
 ### 3. Host Your Plugin
 
 Choose one of these options:
@@ -69,9 +74,13 @@ Add your plugin to `.claude-plugin/marketplace.json`:
 
 - **Documentation**: Include a README.md with installation and usage instructions
 - **Versioning**: Use semantic versioning in your plugin.json
-- **Testing**: Test your plugin before submitting
+- **Testing**: Test your plugin locally before submitting
 - **Descriptions**: Write clear, concise descriptions
-- **Security**: Do not include sensitive data or credentials
+- **Security**:
+  - Do not include sensitive data or credentials in plugin files
+  - Use `.ed3d-plugins.env` for API keys and secrets
+  - Prefer clean environment pattern (`env -i`) for MCP servers
+  - Document all required environment variables in README.md
 
 ## Plugin Validation
 
@@ -83,8 +92,9 @@ Before submitting, validate your plugin:
 
 ## Questions?
 
+- Review [CLAUDE.md](./CLAUDE.md) for comprehensive plugin development guide
+- Check existing plugins in `plugins/` for examples (e.g., `ed3d-fetch`, `ed3d-tavily`)
 - Review the [Claude Code plugin documentation](https://docs.claude.com/en/docs/claude-code/plugins)
-- Check existing plugins for examples
 - Open an issue for questions or discussions
 
 ## Code of Conduct
