@@ -1,0 +1,11 @@
+{
+    "name": "web-fetch",
+    "version": "1.0.0",
+    "description": "Enhanced web content fetching with detailed extraction capabilities",
+    "author": {
+        "name": "Ed Ropple",
+        "email": "ed+claudeplugins@ed3d.net"
+    },
+    "license": "UNLICENSED",
+    "keywords": ["web", "fetch", "scraping", "content-extraction"]
+}

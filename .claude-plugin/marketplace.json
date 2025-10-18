@@ -7,5 +7,13 @@
     "owner": {
         "name": "Ed Ropple <ed+claudeplugins@ed3d.net>"
     },
-    "plugins": []
+    "plugins": [
+        {
+            "name": "web-fetch",
+            "source": "./plugins/web-fetch",
+            "description": "Enhanced web content fetching with detailed extraction and verbatim content support",
+            "category": "utilities",
+            "tags": ["web", "fetch", "scraping", "content-extraction"]
+        }
+    ]
 }
