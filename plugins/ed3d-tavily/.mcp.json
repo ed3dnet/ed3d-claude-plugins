@@ -4,7 +4,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env; exec env -i PATH=\"$PATH\" CLAUDE_PROJECT_ROOT=\"$CLAUDE_PROJECT_ROOT\" TAVILY_API_KEY=\"$TAVILY_API_KEY\" npx -y tavily-mcp@0.2.10)"
+                "(source ${CLAUDE_PROJECT_ROOT}/.ed3d-plugins.env; exec env -i PATH=\"\\$PATH\" CLAUDE_PROJECT_ROOT=\"${CLAUDE_PROJECT_ROOT}\" TAVILY_API_KEY=\"\\$TAVILY_API_KEY\" npx -y tavily-mcp@0.2.10)"
             ]
         }
     }
