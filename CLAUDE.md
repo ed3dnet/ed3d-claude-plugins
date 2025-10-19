@@ -141,6 +141,12 @@ For enhanced security, use a **clean environment** that explicitly passes only r
 - The MCP server only needs specific variables
 - You want to prevent environment pollution
 
+**Critical escaping rules**:
+- **DO NOT escape `$` in JSON**: Use `"$PATH"` not `"\\$PATH"`
+- Claude Code handles the JSON parsing correctly without extra escaping
+- Variables like `$PATH` and `$API_KEY` will be expanded by bash after sourcing the env file
+- `${CLAUDE_PROJECT_ROOT}` is expanded by Claude Code before bash sees it
+
 ### Environment File Structure
 
 Users create `.ed3d-plugins.env` in their project root:
